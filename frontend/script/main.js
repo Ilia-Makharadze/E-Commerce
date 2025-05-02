@@ -1,4 +1,4 @@
-const url = 'https://678e2d7ba64c82aeb11f5a99.mockapi.io/food/api/booksApi';
+const url = '../backend/data/books.json';
 const searchToggle = document.getElementById("searchToggle");
 const searchContainer = document.getElementById("searchContainer");
 const logOut=document.getElementById("logOut");
@@ -16,18 +16,21 @@ fetch(url)
         window.search = function () {
             let filter = document.getElementById("filter").value.toLowerCase();
             let filteredBooks = jsonResult.filter(book =>
-                book.genre.toLowerCase().includes(filter) ||
-                book.author.toLowerCase().includes(filter) ||
-                book.title.toLowerCase().includes(filter)
+              book.title.toLowerCase().includes(filter) ||
+              book.authors.join(' ').toLowerCase().includes(filter) || // authors კიდევ შეაერთეთ სტრინგად
+              book.description.toLowerCase().includes(filter) ||
+              book.isbn.toLowerCase().includes(filter)
             );
             displayBooks(filteredBooks);
-        };
-        const filterInput=document.getElementById("filter");
-        filterInput.addEventListener("input",function(){
-            if(filterInput.value===""){
-                displayBooks(jsonResult);
+          };
+      
+          const filterInput = document.getElementById("filter");
+          filterInput.addEventListener("input", function () {
+            if (filterInput.value === "") {
+              displayBooks(jsonResult);
             }
-        })
+          });
+      
 
         searchToggle.addEventListener("click", function () {
            
@@ -78,21 +81,38 @@ fetch(url)
         })
     });
 
-function displayBooks(books) {
-    let res = document.querySelector(".res");
-    res.innerHTML = "";
+    function displayBooks(books) {
+        let res = document.querySelector(".res");
+        res.innerHTML = "";
+    
+        if (books.length === 0) {
+            res.innerHTML = "<p>No books found.</p>";
+            return;
+        }
+    
+        books.forEach(book => {
+            let bookDiv = document.createElement("div");
+    
+         
+            bookDiv.innerHTML = `
+                <img src="${book.coverImg}" alt="${book.title}" />
+                <div class="book-info">
+                    <h3>${book.title}</h3>
+                    <h4>Author: ${book.author}</h4>
+                    <p><strong>Genre:</strong> ${book.genre}</p>
+                    <p><strong>Description:</strong> ${book.description}</p>
+                </div>
+            `;
+            bookDiv.onclick=()=>{
+                const bookId = book.id; 
+                window.location.href = `book.html?id=${bookId}`;//going in book.html file
+                 
+            }
 
-    if (books.length === 0) {
-        res.innerHTML = "<p>No books found.</p>";
-        return;
+            res.appendChild(bookDiv);
+        });
     }
-
-    books.forEach(book => {
-        let bookDiv = document.createElement("div");
-        bookDiv.innerHTML = `<h3>${book.title}</h3><p>Author: ${book.author}</p><p>Genre: ${book.genre}</p>`;
-        res.appendChild(bookDiv);
-    });
-}
+    
 
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
@@ -110,6 +130,8 @@ function updateSlidePosition() {
     const slidesContainer = document.querySelector('.slides');
     slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
+
+
 
 setInterval(() => moveSlide(1), 3000); //automatically change after 3 second
 

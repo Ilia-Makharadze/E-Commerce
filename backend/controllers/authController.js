@@ -1,25 +1,25 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../models'); // User მოდელი
+const { User } = require('../models'); // User model
 
 async function login(req, res) {
     const { email, password } = req.body;
 
     try {
-        // მომხმარებლის მოძებნა email-ით
+        
         const user = await User.findOne({ where: { email } });
 
         if (!user) {
             return res.status(400).json({ error: 'Invalid email or password.' });
         }
 
-        // პაროლის შედარება (შეგიძლია bcrypt-სთან)
+        
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
             return res.status(400).json({ error: 'Invalid email or password.' });
         }
 
-        // წარმატებული ლოგინი
+        
         res.json({ message: 'Login successful!' });
 
     } catch (error) {

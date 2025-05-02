@@ -21,7 +21,7 @@ async function login(req,res) {
             return res.status(400).json({error: 'Invalid data'});
         }
 
-        //gerate token
+        //generaate token
         const payload={id: user.id,email:user.email};
         const token=jwt.sign(payload,process.env.JWT_SECRET,{
             expiresIn:process.env.JWT_EXPIRES_IN
