@@ -12,13 +12,13 @@ exports.forgotPassword = async (req, res) => {
   if (!user)
     return res.status(404).json({ error: 'No user with that email.' });
 
-  // გავაკეთოთ Reset Token – აქ ვიყენებთ JWT-ს
+  // create reset token
   const resetToken = jwt.sign(
     { id: user.id },
     process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
-  // Send link
+  // Send link with sandbox
   const resetUrl = `${process.env.CLIENT_URL}/reset-password.html?token=${resetToken}`;
   const message = `Reset your password by visiting:\n\n${resetUrl}\n\nThis link expires in 1 hour.`;
 

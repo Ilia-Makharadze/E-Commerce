@@ -1,22 +1,22 @@
 const bcrypt = require('bcrypt');
-const  User  = require('../models/userModel'); // User მოდელი
+const  User  = require('../models/userModel'); 
 
-// რეგისტრაცია
+
 async function register(req, res) {
     const { firstname, lastname, email, password } = req.body;
 
     try {
-        // ამოწმებთ, თუ მომხმარებელი უკვე არსებობს
+        
         const existingUser = await User.findOne({ where: { email } });
 
         if (existingUser) {
             return res.status(400).json({ error: 'Email is already in use.' });
         }
 
-        // პაროლის ჰეშირება
+        
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // ახალი მომხმარებლის შექმნა
+        //create new user
         const newUser = await User.create({
             firstname,
             lastname,

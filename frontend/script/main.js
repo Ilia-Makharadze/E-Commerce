@@ -17,7 +17,7 @@ fetch(url)
             let filter = document.getElementById("filter").value.toLowerCase();
             let filteredBooks = jsonResult.filter(book =>
               book.title.toLowerCase().includes(filter) ||
-              book.authors.join(' ').toLowerCase().includes(filter) || // authors კიდევ შეაერთეთ სტრინგად
+              book.authors.join(' ').toLowerCase().includes(filter) || 
               book.description.toLowerCase().includes(filter) ||
               book.isbn.toLowerCase().includes(filter)
             );

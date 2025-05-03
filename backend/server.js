@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/', authRoutes);
 app.use('/api/books', bookRoutes);
 
 
