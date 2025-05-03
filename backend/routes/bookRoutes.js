@@ -19,6 +19,20 @@ router.get('/',(req,res)=>{
     res.json(books);
 })
 
+router.get('/:id',(req,res)=>{
+     const books = readBooks();
+    const id = req.params.id;
+
+    const book = books.find(b => String(b.id) === id);
+
+    if (book) {
+        res.json(book);
+    } else {
+        res.status(404).json({ message: 'Book not found' });
+    }
+})
+
+
 router.post('/',(req,res)=>{
     const books=readBooks();
     newBook=req.body;

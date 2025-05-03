@@ -57,7 +57,7 @@ async function registrationSubmit() {
 
     // send to backend
     try {
-        const response = await fetch('http://localhost:3000/api/auth/register', {
+        const response = await fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,9 @@ async function registrationSubmit() {
 
         if (response.ok) {
             resultContainer.innerHTML = `<p style="color: green;">${data.message}</p>`;
-            setTimeout(() => toggleForms("login"), 1000);
+            setTimeout(() => {
+                window.location.href = "main.html"; 
+            }, 1000);
         } else {
             resultContainer.innerHTML = `<p style="color: red;">${data.error}</p>`;
         }
@@ -91,7 +93,7 @@ async function loginSubmit() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
