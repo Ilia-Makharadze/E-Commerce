@@ -10,7 +10,7 @@ async function register(req, res) {
         const existingUser = await User.findOne({ where: { email } });
 
         if (existingUser) {
-            return res.status(400).json({ error: 'Email is already in use.' });
+            return res.status(400).json({ error: 'Email is already in use' });
         }
 
         
@@ -27,7 +27,7 @@ async function register(req, res) {
         res.status(201).json({ message: 'Registration successful!' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Server error.' });
+        res.status(500).json({ error: 'Server error' });
     }
 }
 

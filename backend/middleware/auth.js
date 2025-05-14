@@ -3,7 +3,7 @@ const jwt=require('jsonwebtoken');
 function protect(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer '))
-      return res.status(401).json({ error: 'Not authorized.' });
+      return res.status(401).json({ error: 'Not authorized' });
   
     const token = authHeader.split(' ')[1];
     try {
@@ -11,7 +11,7 @@ function protect(req, res, next) {
       req.user = decoded;  
       next();
     } catch {
-      return res.status(401).json({ error: 'Token invalid or expired.' });
+      return res.status(401).json({ error: 'Token invalid or expired' });
     }
   }
   

@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 });
 sequelize.sync()
 .then(() => {
-    console.log('Database connected and models synchronized.');
+    console.log('Database connected and models synchronized');
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
     });

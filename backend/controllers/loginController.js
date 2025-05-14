@@ -6,13 +6,13 @@ const jwt =require('jsonwebtoken')
 async function login(req,res) {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required.' });
+      return res.status(400).json({ error: 'Email and password are required' });
     } 
     try {
         // search customer
         const user = await User.findOne({ where: { email } });
         if (!user) {
-          return res.status(400).json({ error: 'Invalid email or password.' });
+          return res.status(400).json({ error: 'Invalid email or password' });
         }
         //compare hash data
 
@@ -29,7 +29,7 @@ async function login(req,res) {
         return res.json({message: 'login successful'});
 }catch(err){
     console.error(err);
-    return res.status(500).json({error:'Server error.'});
+    return res.status(500).json({error:'Server error'});
     }
 }
 

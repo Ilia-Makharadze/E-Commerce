@@ -10,8 +10,8 @@ const readBooks=()=>{
     return JSON.parse(data);
 }
 
-const writeBooks=(books)=>{
-    fs.writeFileSync(booksPath,JSON.stringify(books,null,2));
+const writeBooks=(book)=>{
+    fs.writeFileSync(booksPath,JSON.stringify(book,null,2));
 }
 
 router.get('/',(req,res)=>{
@@ -21,9 +21,8 @@ router.get('/',(req,res)=>{
 
 router.get('/:id',(req,res)=>{
      const books = readBooks();
-    const id = req.params.id;
-
-    const book = books.find(b => String(b.id) === id);
+    const id = parseInt(req.params.id);
+    const book = books.find(item => item.id === id);
 
     if (book) {
         res.json(book);
@@ -63,7 +62,7 @@ router.delete('/:id',(req,res)=>{
     }
 
     writeBooks(books);
-    res.status(204).send();
+    res.status(200).json({ message: 'Book deleted successfully' });
 })
 
 router.put('/:id', (req, res) => {
@@ -71,16 +70,27 @@ router.put('/:id', (req, res) => {
     const updateBook = req.body;
 
     const books = readBooks();
-    const bookIndex = books.findIndex(book => book.id === id);
+    let bookFound = false;
+    let bookIndex = -1; 
 
-    if (bookIndex === -1) {
+    
+    for (let i = 0; i < books.length; i++) {
+        if (books[i].id === id) {
+            books[i] = { ...books[i], ...updateBook };
+            bookIndex = i; 
+            bookFound = true;
+            break;  
+        }
+    }
+
+    if (!bookFound) {
         return res.status(404).json({ message: 'Book not found' });
     }
 
-    books[bookIndex] = { ...books[bookIndex], ...updateBook };
-
+   
     writeBooks(books);
-    res.json(books[bookIndex]);
+    res.json(books[bookIndex]);  
 });
+
 
 module.exports=router;

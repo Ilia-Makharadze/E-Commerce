@@ -481,7 +481,7 @@
     "id": 45
   },
   {
-    "title": "Animal Farm",
+    "title": "Animal Farm1232",
     "publicationYear": 1945,
     "isbn": "978-0-452-28424-1",
     "coverImg": "https://covers.openlibrary.org/b/isbn/9780452284241-L.jpg",
@@ -490,17 +490,6 @@
       2
     ],
     "id": 46
-  },
-  {
-    "title": "Animal Farm",
-    "publicationYear": 1945,
-    "isbn": "978-0-452-28424-1",
-    "coverImg": "https://covers.openlibrary.org/b/isbn/9780452284241-L.jpg",
-    "description": "A satire on Soviet totalitarianism.",
-    "authors": [
-      2
-    ],
-    "id": 47
   },
   {
     "title": "Warm and Peace",
@@ -523,5 +512,16 @@
       10
     ],
     "id": 49
+  },
+  {
+    "title": "test",
+    "publicationYear": 1945,
+    "isbn": "978-0-452-28424-1",
+    "coverImg": "https://thaka.bing.com/th/id/OIP.b-rgrlZavcovltrZtrJSfQHaLf?rs=1&pid=ImgDetMain",
+    "description": "The book chronicles the French invasion of Russia and its aftermath during the Napoleonic era. It uses five interlocking narratives following different Russian aristocratic families to illustrate Napoleon's impact on Tsarist society. Portions of an earlier version, titled The Year 1805,[4] were serialized in The Russian Messenger from 1865 to 1867 before the novel was published in its entirety in 1869.",
+    "authors": [
+      10
+    ],
+    "id": 50
   }
 ]
